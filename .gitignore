@@ -1,0 +1,14 @@
+build/
+dist/
+.idea/
+venv*/
+*.bin
+*.egg-info/
+__pycache__/
+.DS_Store
+*.so
+*.pyd
+# dll and dylib are not here, since libcrypto needs to be included
+Thumbs.db
+# clangd things
+compile_flags.txt

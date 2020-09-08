@@ -1,0 +1,4 @@
+include haccrypto/aes.h
+include haccrypto/libcrypto-1_1.dll
+include haccrypto/libcrypto-1_1-x64.dll
+include haccrypto/libcrypto.1.1.dylib
