@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e -u -x
 
 pyvers=(cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39)
