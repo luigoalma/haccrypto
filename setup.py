@@ -17,7 +17,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='haccrypto',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(),
     url='https://github.com/luigoalma/haccrypto',
     license='MIT',
@@ -33,6 +33,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
     ext_modules=[Extension('haccrypto._crypto', sources=['haccrypto/_crypto.cpp', 'haccrypto/aes.cpp'],
                            extra_compile_args=['/Ox' if sys.platform == 'win32' else '-O3',

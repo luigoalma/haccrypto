@@ -28,7 +28,6 @@ typedef HMODULE DYHandle;
 #include <dlfcn.h>
 #define __ldl__ 1
 typedef void* DYHandle;
-#define WINAPI
 #endif
 
 typedef uint8_t u8;
@@ -251,15 +250,15 @@ public:
     }
 };
 
-void *(WINAPI *EVP_CIPHER_CTX_new)() = NULL;
-void *(WINAPI *EVP_aes_128_ecb)() = NULL;
-int (WINAPI *EVP_CipherInit_ex)(void*, void*, void*, const void*, void*, int) = NULL;
-int (WINAPI *EVP_CIPHER_CTX_key_length)(void*) = NULL;
-void (WINAPI *EVP_CIPHER_CTX_set_padding)(void*, int) = NULL;
-int (WINAPI *EVP_CipherUpdate)(void*, void*, int*, const void*, int) = NULL;
-int (WINAPI *EVP_CipherFinal_ex)(void*, void*, int*) = NULL;
-void (WINAPI *EVP_CIPHER_CTX_free)(void*) = NULL;
-unsigned long (WINAPI *OpenSSL_version_num)() = NULL;
+void *(*EVP_CIPHER_CTX_new)() = NULL;
+void *(*EVP_aes_128_ecb)() = NULL;
+int (*EVP_CipherInit_ex)(void*, void*, void*, const void*, void*, int) = NULL;
+int (*EVP_CIPHER_CTX_key_length)(void*) = NULL;
+void (*EVP_CIPHER_CTX_set_padding)(void*, int) = NULL;
+int (*EVP_CipherUpdate)(void*, void*, int*, const void*, int) = NULL;
+int (*EVP_CipherFinal_ex)(void*, void*, int*) = NULL;
+void (*EVP_CIPHER_CTX_free)(void*) = NULL;
+unsigned long (*OpenSSL_version_num)() = NULL;
 
 static DynamicHelper lcrypto;
 static bool lib_to_load = true;
