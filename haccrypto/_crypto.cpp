@@ -352,6 +352,7 @@ public:
     inline PyObject *PythonRun(XTSNObject *self, PyObject *args, PyObject *kwds) {
         Py_buffer orig_buf;
         PyObject *local_buf = NULL;
+        bool error = false;
 
         static const char* keywords[] = {
             "buf",
@@ -370,29 +371,29 @@ public:
             if (!local_buf) {
                 PyErr_SetString(PyExc_MemoryError, "Python doesn't have memory for the buffer.");
             }
-            goto end;
+            goto end_func;
         }
 
         if (orig_buf.len % 16) {
             PyErr_SetString(PyExc_ValueError, "length not divisable by 16");
-            goto end;
+            goto end_func;
         }
 
         if (skipped_bytes % 16) {
             PyErr_SetString(PyExc_ValueError, "skipped bytes not divisable by 16");
-            goto end;
+            goto end_func;
         }
 
         if (sector_size % 16 || sector_size == 0) {
             PyErr_SetString(PyExc_ValueError, sector_size == 0 ? "sector size must not be 0" : "sector size not divisable by 16");
-            goto end;
+            goto end_func;
         }
 
         local_buf = PyBytes_FromStringAndSize((char * ) orig_buf.buf, orig_buf.len);
 
         if (!local_buf) {
             PyErr_SetString(PyExc_MemoryError, "Python doesn't have memory for the buffer.");
-            goto end;
+            goto end_func;
         }
 
         roundkeys_key = self->roundkeys_x2;
@@ -403,11 +404,20 @@ public:
         #ifdef DEBUGON
         Debug();
         #endif
+
+        Py_BEGIN_ALLOW_THREADS;
+
         try {
             if(ossl) ctx = EVP_CIPHER_CTX_new();
             else ctx = NULL;
             Run();
         } catch(...) {
+            error = true;
+        }
+
+        Py_END_ALLOW_THREADS;
+
+        if(error) {
             Py_XDECREF(local_buf);
             local_buf = NULL;
             PyErr_SetString(PyExc_RuntimeError, "Unexpected error from openssl.");
@@ -415,7 +425,7 @@ public:
 
         if(ossl) EVP_CIPHER_CTX_free(ctx);
 
-    end:
+    end_func:
         PyBuffer_Release(&orig_buf);
         return local_buf;
     }
