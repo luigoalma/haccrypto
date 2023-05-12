@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <mutex>
+#include <string>
 #include <inttypes.h>
 
 extern "C" {
