@@ -12,15 +12,9 @@ Function Run-Container($Version, $Arch) {
     Invoke-Expression "$Command"
 }
 
-#Run-Container -Version 2010 -Arch i686
-#Run-Container -Version 2010 -Arch x86_64
-
-Run-Container -Version 2014 -Arch i686
+#Run-Container -Version 2014 -Arch i686
 Run-Container -Version 2014 -Arch x86_64
 Run-Container -Version 2014 -Arch aarch64
-#Run-Container -Version 2014 -Arch ppc64le
 
-Run-Container -Version _2_24 -Arch i686
-Run-Container -Version _2_24 -Arch x86_64
-Run-Container -Version _2_24 -Arch aarch64
-#Run-Container -Version _2_24 -Arch ppc64le
+Run-Container -Version _2_28 -Arch x86_64
+Run-Container -Version _2_28 -Arch aarch64

@@ -5,12 +5,12 @@
 
 if [[ $# -eq 0 ]]; then
 	echo "Usage: $0 [python-versions]"
-	echo "e.g. $0 3.6 3.7 3.8 3.9 3.10"
-	echo "Alternate: $0 3.{6,7,8,9,10}"
+	echo "e.g. $0 3.6 3.7 3.8 3.9 3.10 3.11"
+	echo "Alternate: $0 3.{6,7,8,9,10,11}"
 	echo
 	echo "Recommended for release:"
-	echo "  Intel:         $0 3.{6,7,8,9}"
-	echo "  Apple Silicon: $0 3.{8,9,10}"
+	echo "  Intel:         $0 3.{6,7,8,9,10,11}"
+	echo "  Apple Silicon: $0 3.{8,9,10,11}"
 	exit 1
 fi
 
